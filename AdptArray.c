@@ -20,7 +20,7 @@ PAdptArray CreateAdptArray(COPY_FUNC copyFunc, DEL_FUNC delFunc,
     if(pArr == NULL){
         return NULL;
     }
-    // Initiate the variables of the array
+    // Initialize
     pArr->ArrSize = 0;
     pArr->pElementArr = NULL;
     pArr->copyFunc = copyFunc;
@@ -29,7 +29,7 @@ PAdptArray CreateAdptArray(COPY_FUNC copyFunc, DEL_FUNC delFunc,
     return pArr;
 }
 
-// Deleting all the array with all elements inside
+// deleting all the array element and free the memory
 void DeleteAdptArray(PAdptArray pArr){
     if(pArr == NULL){
         return;
@@ -42,13 +42,13 @@ void DeleteAdptArray(PAdptArray pArr){
     free(pArr);
 }
 
-// splitting into 2 cases and save a copy of the element specifies as input and insert it into the array
+// function that gets an index and a new element
 Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElement){
     PElement* newpElement;
     if(pArr == NULL){
         return FAIL;
     }
-    // handling with the case when the index specified is greater than the array size so, we need to extend the array
+    // if the index is greater than the size of the array
     if(idx >= pArr->ArrSize){
         if ((newpElement = (PElement*)calloc((idx + 1), sizeof(PElement))) == NULL)
             return FAIL;
@@ -58,7 +58,6 @@ Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElement){
         pArr->pElementArr = newpElement;
     }
 
-    // Delete Previous Elem
     if(pArr->pElementArr[idx]!=NULL)
         pArr->delFunc((pArr->pElementArr)[idx]);
     (pArr->pElementArr)[idx] = pArr->copyFunc(pNewElement);
@@ -67,7 +66,7 @@ Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElement){
     return SUCCESS;
 }
 
-// getting the copy of the element that exists in idx index of the array
+// function that gets the array and index and return a copy of the element in the index
 PElement GetAdptArrayAt(PAdptArray pArr, int idx){
     if(idx>=pArr->ArrSize)
         return NULL;
@@ -77,14 +76,14 @@ PElement GetAdptArrayAt(PAdptArray pArr, int idx){
     return cpy;
 }
 
-// returning the size of the array
+// function to return the size of the array
 int GetAdptArraySize(PAdptArray arr) {
     if(arr==NULL)
         return -1;
     return arr->ArrSize;
 }
 
-//printing all elements in the array with the help of the function: printFunc
+//printing all elements in the dynamic array
 void PrintDB(PAdptArray pArr){
     if(pArr == NULL){
         return;
