@@ -10,12 +10,18 @@ SOURCES=AdptArray.c book.c Person.c
 
 run: demo
 	./$^
+	
+my_run: my_demo
+	./$^
 
 mem_test: demo
 	valgrind ./$^
 
 demo: Demo.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o demo
+
+my_demo: My_Demo.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o my_demo	
 
 %.o: %.c $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
