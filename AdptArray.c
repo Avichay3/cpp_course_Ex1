@@ -7,17 +7,18 @@
 typedef struct AdptArray_{
     int ArrSize;
     PElement *pElementArr;
-    COPY_FUNC copyFunc;
-    DEL_FUNC delFunc;
-    PRINT_FUNC printFunc;
+    COPY_FUNC copyFunc; //used to make a copy of an element when it needs to be stored in the dynamic array.
+    //provide a way to create a copy of an element so that the dynamic array can store independent instances
+    // of the elements rather than just pointers to the original elements
+    DEL_FUNC delFunc; //as COPY_FUNC but the purpose is for delete
+    PRINT_FUNC printFunc;//as COPY_FUNC but the purpose is for print
 }AdptArray, *PAdptArray;
 
 
 PAdptArray CreateAdptArray(COPY_FUNC copyFunc, DEL_FUNC delFunc,
     PRINT_FUNC printFunc){
     PAdptArray pArr = (PAdptArray)malloc(sizeof(AdptArray));
-    // aloccatin didnt succed
-    if(pArr == NULL){
+    if(pArr == NULL){ // aloccatin didnt succed
         return NULL;
     }
     // Initialize
