@@ -42,7 +42,7 @@ void DeleteAdptArray(PAdptArray pArr){
     free(pArr);
 }
 
-// function get an index and a new element
+// function get an index and a new element and setting the element at a specific index
 Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElement){
     PElement* newpElement;
     if(pArr == NULL){
