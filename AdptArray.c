@@ -15,8 +15,7 @@ typedef struct AdptArray_{
 }AdptArray, *PAdptArray;
 
 
-PAdptArray CreateAdptArray(COPY_FUNC copyFunc, DEL_FUNC delFunc,
-    PRINT_FUNC printFunc){
+PAdptArray CreateAdptArray(COPY_FUNC copyFunc, DEL_FUNC delFunc,PRINT_FUNC printFunc){//take 3 function pointers
     PAdptArray pArr = (PAdptArray)malloc(sizeof(AdptArray));
     if(pArr == NULL){ // aloccatin didnt succed
         return NULL;
@@ -43,7 +42,7 @@ void DeleteAdptArray(PAdptArray pArr){
     free(pArr);
 }
 
-// function that gets an index and a new element
+// function get an index and a new element
 Result SetAdptArrayAt(PAdptArray pArr, int idx, PElement pNewElement){
     PElement* newpElement;
     if(pArr == NULL){
